@@ -1,0 +1,64 @@
+﻿@model IList<Menu>
+@using DoanLTWeb.Utilities
+ <!-- Navbar start -->
+    <div class="container-fluid nav-bar">
+        <div class="container">
+            <nav class="navbar navbar-light navbar-expand-lg py-4">
+                <a href="index.html" class="navbar-brand">
+                    <h1 class="text-primary fw-bold mb-0">Cater<span class="text-dark">Serv</span> </h1>
+                </a>
+                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars text-primary"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto">
+                    @foreach (var menu in Model.Where(m => m.Levels == 1).OrderBy(n => n.MenuOrder))
+                    {
+                        var Pid = menu.MenuID;
+                   
+                        var Smenu = Model.Where(p => p.ParentID == Pid).OrderBy(p => p.MenuOrder).ToList();
+
+                        @if (Smenu.Count == 0)
+                        {
+                            <a href="/@menu.Link" class="nav-item nav-link">@menu.MenuName</a>
+                        }
+                        else
+                        {
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@menu.MenuName</a>
+                                <div class="dropdown-menu m-0">
+                                    @foreach (var smn in Smenu)
+                                    {
+                     
+                                        <a href="/@smn.Link" class="dropdown-item">@smn.MenuName</a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                    </div>
+                    <button class="btn-search btn btn-primary btn-md-square me-4 rounded-circle d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
+                    <a href="/Booking" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill">Đặt Ngay</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+    <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tìm kiếm từ khóa</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control bg-transparent p-3" placeholder="Từ khóa" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->

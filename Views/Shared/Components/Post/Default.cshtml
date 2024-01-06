@@ -1,0 +1,35 @@
+﻿@using DoanLTWeb.Models;
+@using DoanLTWeb.Utilities;
+@model IList<Post>
+<!-- Blog Start -->
+<div class="container-fluid blog py-6">
+    <div class="container">
+        <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+            <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Các bài Viết</small>
+            <h1 class="display-5 mb-5">Be First Who Read News</h1>
+        </div>
+        <div class="row gx-4 justify-content-center">
+            @foreach(var item in Model)
+            {
+                string url = Functions.TitleSlugGeneration("post", item.Title, item.PostID);
+                    <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.3s">
+                    <div class="blog-item">
+                        <div class="overflow-hidden rounded">
+                            <img src="@item.Images" class="img-fluid w-100" style="height:277px" alt="">
+                        </div>
+                        <div class="blog-content mx-4 d-flex rounded bg-light">
+                            <div class="text-dark bg-primary rounded-start">
+                                <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
+                                    <p class="fw-bold mb-0">@item.CreatedDate.ToString()</p>
+                                </div>
+                            </div>
+                            <a href="/@url" class="h5 lh-base my-auto h-100 p-3">@item.Title</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+</div>
+<!-- Blog End -->

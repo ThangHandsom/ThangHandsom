@@ -1,0 +1,50 @@
+﻿@{
+    List<ProductCategory> productCategories = ViewBag.productCategories;
+}
+<!-- Hero Start -->
+<div class="container-fluid bg-light py-6 my-6 mt-0">
+    <div class="container text-center animated bounceInDown">
+        <h1 class="display-1 mb-4">Menu</h1>
+        <ol class="breadcrumb justify-content-center mb-0 animated bounceInDown">
+            <li class="breadcrumb-item"><a href="/Home">Trang chủ</a></li>
+            <li class="breadcrumb-item text-dark" aria-current="page">Thực đơn</li>
+        </ol>
+    </div>
+</div>
+<!-- Hero End -->
+<!-- Menu Start -->
+<div class="container-fluid menu py-6">
+    <div class="container">
+        <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+            <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Menu</small>
+            <h1 class="display-5 mb-5">Những món ăn đặc sắc của nhà hàng chúng tôi</h1>
+        </div>
+        <div class="tab-class text-center">
+            <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow bounceInUp" data-wow-delay="0.1s">
+                @foreach (var item in productCategories)
+                {
+                    <li class="nav-item p-2">
+                        <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill @(item.IsActive ? "active" : "")" data-bs-toggle="pill" href="#@item.Name">
+                            <span class="text-dark" style="width: 150px;">@item.Name</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+
+            <div class="tab-content">
+                @foreach (var item in productCategories)
+                {
+                    <div id="@item.Name" class="tab-pane fade show p-0 @(item.IsActive ? "active" : "")">
+                        <div class="row g-4">
+                            <div class="col-lg-6 wow bounceInUp" data-wow-delay="0.1s">
+                                @await Component.InvokeAsync("Product", item.CateProductID)
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Menu End -->

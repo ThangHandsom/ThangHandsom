@@ -1,0 +1,45 @@
+﻿@model DoanLTWeb.Models.Contact
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+
+<div class="container shadow p-5">
+    <h1>Chi tiết phản hồi</h1>
+    <h4>(Liên hệ)</h4>
+    <hr/>
+    <dl class="row">
+        <dt class = "col-sm-1">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-11">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-1">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class = "col-sm-11">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class = "col-sm-1">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-11">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-1">
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+        <dd class = "col-sm-11">
+            @Html.DisplayFor(model => model.Message)
+		</dd>
+    </dl>
+    <div>
+
+        <a asp-action="Index" class="btn btn-primary">Quay lại</a>
+    </div>
+</div> 
+
+</main>

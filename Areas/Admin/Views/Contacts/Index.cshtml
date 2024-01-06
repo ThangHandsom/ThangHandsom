@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DoanLTWeb.Models.Contact>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Danh sách liên hệ</h2>
+    </div>
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body mt-4">
+                        <table class="table table-borderless datatable">
+                            <thead>
+                                <tr>
+                                    <th class="col-1 text-center">Thứ tự</th>
+                                    <th class="col-3 text-center">Tên khách hàng</th>
+                                    <th class="col-2 text-center">Số điện thoại</th>
+                                    <th class="col-2 text-center">Email</th>
+                                    <th class="col-2 text-center">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 1;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="tr_@item.ContactID">
+                                        <td class="text-center">@(i++)</td>
+                                        <td class="text-center">@item.Name</td>
+                                        <td class="text-center">@item.Phone</td>
+                                        <td class="text-center">@item.Email</td>                                      
+                                        <td class="text-center">
+                                            <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Contacts", new { id = item.ContactID })">Chi tiết</a> |
+                                            <a class="btn btn-danger btn-sm btn-delete" href="@Url.Action("Delete", "Contacts", new { id = item.ContactID })">Xóa</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
